@@ -3,6 +3,12 @@ name: Android CI
 on:
   push:
     branches: [ "master" ]
+    paths:
+      - 'app/**'  # app 目录及其子目录
+      - 'build.gradle'  # 项目顶级构建脚本
+      - 'settings.gradle'  # 项目设置脚本
+      - 'gradle/**'  # Gradle 配置文件
+      - 'gradle.properties'  # Gradle 属性文件
 
 jobs:
   build:
@@ -27,7 +33,7 @@ jobs:
       run: ./gradlew assembleDebug # 构建调试版本APK
 
     - name: Upload APK
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: app-debug
-        path: app/build/outputs/apk/debug/app-debug.apk
+        path: app/build/outputs/apk/debug
